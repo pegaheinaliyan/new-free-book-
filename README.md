@@ -16,12 +16,12 @@ How to help us?
 add new book to library!:)
 
 for runing this you should have:
-  yarn '\n' 
-  chai
-  react
-  redux
-  react-redux
-  express
+  yarn,
+  chai,
+  react,
+  redux.
+  react-redux,
+  express,
   create-react-app
 installed.
 
