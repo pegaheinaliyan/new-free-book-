@@ -1,4 +1,4 @@
-This App is made to help people find freeBook
+This App is made to help people find free books
 
 It's simply a library which get its book from people who wants to share their books.
 
@@ -14,3 +14,20 @@ let's enjoy reading books together!
 How to help us?
 
 add new book to library!:)
+
+for runing this you should have:
+  yarn 
+  chai
+  react
+  redux
+  react-redux
+  express
+  create-react-app
+installed.
+
+Note: this project is still under construction.
+there's not real dataBase set for it yet.
+
+stories to be completed:
+-as a user when I pick up a book I should be able to remove It from library
+
