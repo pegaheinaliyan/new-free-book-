@@ -16,7 +16,7 @@ How to help us?
 add new book to library!:)
 
 for runing this you should have:
-  yarn 
+  yarn '\n' 
   chai
   react
   redux
