@@ -12,13 +12,14 @@
     "express": "~4.15.2",
     "knex": "^0.13.0",
     "morgan": "~1.8.1",
+    "pg": "^7.1.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-google-maps": "^7.2.0",
-      "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.0.11",
     "react-test-renderer": "^15.6.1",
+    "redux": "^3.7.2",
     "serve-favicon": "~2.4.2"
   },
   "scripts": {
@@ -27,9 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "migrate": "knex migrate:latest --knexfile services/db/knexfile.js",
-    "rollback": "knex migrate:rollback --knexfile services/db/knexfile.js"
+    "migrate": "knex migrate:latest ",
+    "rollback": "knex migrate:rollback "
   },
   "proxy": "http://localhost:3001"
-  
 }
