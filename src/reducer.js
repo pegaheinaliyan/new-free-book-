@@ -48,7 +48,7 @@ let records = {};
 export function fetchBooks () {
   return async dispatch => {
     // API get, get data from DB
-    const response = await (await fetch('http://localhost:3001')).json();
+    const response = await (await fetch('http://localhost:3001'));
   
     for(let record of response) {
 			let book = {};
