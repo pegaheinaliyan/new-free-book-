@@ -9,9 +9,7 @@ exports.up = function (knex, Promise) {
 
     t.float('latitude')
 
-
     t.float('longitude')
-
 
     t.text('category')
 
