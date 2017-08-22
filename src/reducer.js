@@ -1,47 +1,75 @@
-const records = {
-	1 :{
-		ISBN: 1,
-		name: 'The Goldfinch',  
-		latitude: 35.691566,
-		longitude: 139.687922,
-		category: 'Novel'
-	},
-	2 :{
-		ISBN: 2,
-		name: 'Hamilton: The Revolution',  
-		latitude: 35.688795,
-		longitude: 139.682686,
-		category: 'Art'
-	},
-	3: {
-		ISBN: 3,
-		name: 'Hue 1968',  
-		latitude: 35.701126,
-		longitude: 139.709616,
-		category:'History'
-	},
-	4 :{
-		ISBN: 4,
-		name: 'P.S. from Paris',  
-		latitude: 35.697711,
-		longitude: 139.661980,
-		category: 'Romance'
-	},
-	5:{
-		ISBN: 5,
-		name: 'Deep Learning',  
-		latitude: 35.736829,
-		longitude: 139.196777,
-		category: 'Technology'
-	},
-	6:{
-		ISBN: 6,
-		name: 'Orthopedic Physical Assessment',  
-		latitude: 35.531458,
-		longitude: 138.911133,
-		category: 'Medicine'
-	}
+// const records = {
+// 	1 :{
+// 		ISBN: 1,
+// 		name: 'The Goldfinch',  
+// 		latitude: 35.691566,
+// 		longitude: 139.687922,
+// 		category: 'Novel'
+// 	},
+// 	2 :{
+// 		ISBN: 2,
+// 		name: 'Hamilton: The Revolution',  
+// 		latitude: 35.688795,
+// 		longitude: 139.682686,
+// 		category: 'Art'
+// 	},
+// 	3: {
+// 		ISBN: 3,
+// 		name: 'Hue 1968',  
+// 		latitude: 35.701126,
+// 		longitude: 139.709616,
+// 		category:'History'
+// 	},
+// 	4 :{
+// 		ISBN: 4,
+// 		name: 'P.S. from Paris',  
+// 		latitude: 35.697711,
+// 		longitude: 139.661980,
+// 		category: 'Romance'
+// 	},
+// 	5:{
+// 		ISBN: 5,
+// 		name: 'Deep Learning',  
+// 		latitude: 35.736829,
+// 		longitude: 139.196777,
+// 		category: 'Technology'
+// 	},
+// 	6:{
+// 		ISBN: 6,
+// 		name: 'Orthopedic Physical Assessment',  
+// 		latitude: 35.531458,
+// 		longitude: 138.911133,
+// 		category: 'Medicine'
+// 	}
+// }
+
+let records = {};
+
+export function fetchBooks () {
+  return async dispatch => {
+    // API get, get data from DB
+    const response = await (await fetch('http://localhost:3001')).json();
+  
+    for(let record of response) {
+			let book = {};
+			book.id = record.id;
+			book.ISBN = record.isbn;
+			book.name = record.name;
+      book.latitude = record.latitude;
+			book.longitude = record.longitude;
+			book.category = record.category;
+
+			records[book.ISBN] = book;
+			
+    }
+  //   // update state in redux
+  //   dispatch({
+  //     type: 'INIT_STICKER',
+  //     payload: stickers
+  //   })
+  }
 }
+
 
 const initialState = {
 	view: 'Home',
@@ -72,8 +100,11 @@ const reducer = (state = initialState, action) => {
 };
 
 
+
 const findByISBN = (state, action) => {
 	let newState = Object.assign({}, state, {ISBN : action.ISBN});
+	console.log("state",state);
+	console.log("newstate",newState);
 	if(state.ISBN !== null){
 		if(newState.records.hasOwnProperty(newState.ISBN)){
 			newState.bookInfo = newState.records[newState.ISBN];
