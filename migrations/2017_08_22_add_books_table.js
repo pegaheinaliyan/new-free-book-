@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     t.increments()
       .index();
 
-    t.integer('ISBN')
+    t.integer('isbn')
 
     t.text('name')
 
@@ -12,6 +12,7 @@ exports.up = function (knex, Promise) {
     t.float('longitude')
 
     t.text('category')
+    
 
   })
 };
