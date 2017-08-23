@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => {
         findByISBN: (ISBN) => {dispatch(findByISBN(ISBN))},
         addBook: (newBook) => {dispatch(addBook(newBook))},
         backHome: () => {dispatch(backHome())},
+       // fetchBooks:()=>{dispatch(fetchBooks())},
         aboutUs: () => {dispatch(aboutUs())}
     }
 }

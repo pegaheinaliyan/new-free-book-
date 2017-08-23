@@ -6,24 +6,20 @@ const app = require('../app');
 
 chai.use(chaiHttp);
 
-describe("books endpoint",()=>{
+describe("books endpoint", () => {
 
-  
-  it("is getting books",async()=>{
+  it("is getting books", async () => {
     //setup
-
 
     //exercise
 
     const result = await chai.request(app)
-            .get('/books/')
-            .send();
+      .get('/books/')
+      .send();
     //console.log("result",result)
-
     //assert
     expect(result.body.length).to.equal(3);
 
   })
-
 
 })

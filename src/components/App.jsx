@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import Map from '../containers/Map';
 import './App.css';
+import {fetchBooks} from '../reducer'
 
 let props = { ISBN: null };
 
 class App extends Component {
+
+componentDidMount(){
+    fetchBooks();
+  }
+
   render() {
     switch (this.props.view) {
       case ('Home'):

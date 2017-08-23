@@ -3,7 +3,7 @@ import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import PropTypes from 'prop-types';
 
 const MyMap = withGoogleMap(props => {
-  //	let currentLocation = null;
+	//	let currentLocation = null;
 	// if (navigator && navigator.geolocation) {
 	// 	navigator.geolocation.getCurrentPosition((pos) => {
 	// 		const coords = pos.coords;
@@ -13,32 +13,23 @@ const MyMap = withGoogleMap(props => {
 	// 		}
 	// 	})
 	// }
-	
+
 	return (
 		<GoogleMap
 			defaultZoom={10}
-			defaultCenter={{lat: 35.6895, lng:139.69171}}
+			defaultCenter={{ lat: 35.6895, lng: 139.69171 }}
 		>
-		 {props.markers.map((marker, idx) => (
-      <Marker key = {idx}
-        position = {{lat : marker.latitude, lng: marker.longitude }}
-      />
-      ))}
+			{props.markers.map((marker, idx) => (
+				<Marker key={idx}
+					position={{ lat: marker.latitude, lng: marker.longitude }}
+				/>
+			))}
 		</GoogleMap >
 	)
 });
 
-// class Map extends Component {
-//   componentDidMount() {
-//     this.props.fetchBooks();
-//   }
-
-// 	Map.propTypes = {
-//   books: PropTypes.array.isRequired,
-// 	fetchBooks: PropTypes.func.isRequired,
-// 	}
-
 class Map extends Component {
+
 	render() {
 		return (
 			<div style={{ height: `100%` }}>
