@@ -1,4 +1,4 @@
-const Book = function(dbBook){
+const Book = function (dbBook) {
   this.id = dbBook.id;
   this.isbn = dbBook.isbn;
   this.name = dbBook.name;
@@ -8,7 +8,7 @@ const Book = function(dbBook){
 
 };
 
-Book.prototype.serialize = function(){
+Book.prototype.serialize = function () {
   // use a serializer to format the object and
   // clean out any information that shouldn't be
   // sent to the client
@@ -24,9 +24,9 @@ Book.prototype.serialize = function(){
 
 module.exports = (knex) => {
   return {
-    create: require('./create')(knex,Book),
-      list: require('./list')(knex,Book ),
-    // update: require('./update')(knex, Sticker),
+    create: require('./create')(knex, Book),
+    list: require('./list')(knex, Book),
+    //update: require('./update')(knex, Book),
     // delete: require('./delete')(knex, Sticker),
   };
 };
