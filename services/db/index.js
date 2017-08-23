@@ -11,7 +11,7 @@ module.exports = function(config){
   });
 
   return {
-    stickers: require('./books')(knex),
+    books: require('./books')(knex),
   };
 
 };
