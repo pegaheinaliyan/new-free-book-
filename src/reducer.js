@@ -1,4 +1,6 @@
 
+//var apiRounter= require('./routes/index')(express, services);
+//let insertbook = require("../services/db/books/index.js")
 
 let records = {};
 
@@ -23,6 +25,34 @@ export async function fetchBooks() {
 	console.log(response);
 	return response;
 }
+
+  export async function saveBook (book){
+    try {
+      const postData = book;
+      // APT post, save data in DB
+      const savedBook= await ( await fetch('http://localhost:3001', {
+        method: 'post',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(postData)
+      })).json();
+
+      // update state in redux
+      // dispatch({
+      //   type: SAVE_BOOK,
+      //   payload: savedSticker
+      // });
+
+      // // reset input form
+      // dispatch({
+      //   type: CLEAR_BOOK,
+			// })
+			console.log("inside savebook")
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
+
 
 const initialState = {
 	view: 'Home',
@@ -70,8 +100,10 @@ const findByISBN = (state, action) => {
 }
 
 const addNewBook = (state, action) => {
+	console.log("addnewbookstate")
 	let newState = Object.assign({}, state, { view: "SuccessfullAdd" });
-	newState.records[action.newBook.ISBN] = action.newBook;
+	//newState.records[action.newBook.ISBN] = action.newBook;
+	saveBook(action.newBook);
 	return newState;
 }
 
