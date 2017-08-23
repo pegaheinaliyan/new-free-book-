@@ -46,6 +46,7 @@
 let records = {};
 
 export function fetchBooks () {
+	console.log("inside fetchbooks");
   return async dispatch => {
     // API get, get data from DB
     const response = await (await fetch('http://localhost:3001'));
@@ -61,7 +62,8 @@ export function fetchBooks () {
 
 			records[book.ISBN] = book;
 			
-    }
+		}
+		console.log("records",records);
   //   // update state in redux
   //   dispatch({
   //     type: 'INIT_STICKER',
@@ -80,7 +82,7 @@ const initialState = {
 
 
 const reducer = (state = initialState, action) => {
-	console.log(state);
+	console.log("state",state);
 	switch (action.type) {
 		case 'ON_FIND_BOOK':
 			return Object.assign({}, state,{ view: 'findBook' });

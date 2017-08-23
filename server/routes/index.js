@@ -9,7 +9,7 @@ module.exports = (express, services) => {
   /* GET book lists */
   // router.get("/",function (req, res) {console.log("get")})
 
-  router.get('/', function (req, res) {
+  router.get('/books', function (req, res) {
 
     try {
       let books = services.db.books.list();

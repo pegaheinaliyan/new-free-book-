@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import App from '../components/App';
-import {onFindBook, onAddBook, findByISBN, addBook, backHome, aboutUs} from '../actions/App'
+import {onFindBook, onAddBook, findByISBN, addBook, backHome, aboutUs} from '../components/actions/App'
 
 
 const mapStateToProps = (state) => {

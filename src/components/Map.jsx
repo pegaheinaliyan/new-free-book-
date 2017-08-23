@@ -28,6 +28,15 @@ const MyMap = withGoogleMap(props => {
 	)
 });
 
+// class Map extends Component {
+//   componentDidMount() {
+//     this.props.fetchBooks();
+//   }
+
+// 	Map.propTypes = {
+//   books: PropTypes.array.isRequired,
+// 	fetchBooks: PropTypes.func.isRequired,
+// 	}
 
 class Map extends Component {
 	render() {
