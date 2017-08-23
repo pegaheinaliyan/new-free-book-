@@ -25,12 +25,12 @@ module.exports = (express, services) => {
   })
 
 
-  router.post('/', function (req, res) {
+  router.post('/books', function (req, res) {
 
     try {
       let book = services.db.stickers.create(req.body);
 
-      book.then(function (result) {
+      book.then(function(result) {
         res.status(200).send(sticker).json();
       })
     } catch (err) {
@@ -38,8 +38,18 @@ module.exports = (express, services) => {
     }
   });
 
+  router.put('/books', function(req, res) {
+    try {
+      let book =  services.db.books.update(req.body);
 
-  
+      book.then(function(result){
+          res.status(200).send(book);
+      })
+    } catch(err) {
+      res.status(400).send(err.message);
+    }
+  });
+
 
   return router;
 };

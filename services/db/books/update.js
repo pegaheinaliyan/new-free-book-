@@ -1,18 +1,18 @@
 module.exports = (knex, Book) => {
   return async (params) => {
     try {
-      const id = await knex('books')
-        .returning('id')
-        .insert({
+      await knex('books')
+        .where({id: params.id})
+        .update({
           isbn: params.isbn,
           name: params.name,
           latitude: params.latitude,
           longitude: params.longitude,
           category: params.category,
-        })
+        });
 
       const book = await knex('books')
-        .where({'id': id[0]})
+        .where({id: params.id})
         .select();
       return new Book(book[0]);
     } catch (err) {
@@ -20,3 +20,7 @@ module.exports = (knex, Book) => {
     }
   };
 };
+
+
+
+ 

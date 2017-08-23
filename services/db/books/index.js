@@ -26,7 +26,7 @@ module.exports = (knex) => {
   return {
     create: require('./create')(knex, Book),
     list: require('./list')(knex, Book),
-    //update: require('./update')(knex, Book),
-    // delete: require('./delete')(knex, Sticker),
+    update: require('./update')(knex, Book),
+    // delete: require('./delete')(knex, Book),
   };
 };
