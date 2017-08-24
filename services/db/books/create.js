@@ -4,7 +4,7 @@ module.exports = (knex, Book) => {
       const id = await knex('books')
         .returning('id')
         .insert({
-          isbn: params.isbn,
+          isbn: params.ISBN,
           name: params.name,
           latitude: params.latitude,
           longitude: params.longitude,
