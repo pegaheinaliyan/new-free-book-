@@ -51,8 +51,7 @@ componentDidMount(){
                           <div>name:{this.props.records[isbn].name}</div>
                           <div>latitude:{this.props.records[isbn].latitude}</div>
                           <div>longitude:{this.props.records[isbn].longitude}</div>
-                          <div>category:{this.props.records[isbn].category}</div>
-                           <div> <button onClick={this.deleteBook.bind(this)}>TakeBook</button> </div> 
+                          <div>category:{this.props.records[isbn].category}</div> 
                           =========================================================================
                         </div>
                       })
@@ -66,6 +65,7 @@ componentDidMount(){
                       <div>latitude:{this.props.bookInfo.latitude}</div>
                       <div>longitude:{this.props.bookInfo.longitude}</div>
                       <div>category:{this.props.bookInfo.category}</div>
+                      <div> <button onClick={this.handelDeleteBook.bind(this)}>TakeBook</button> </div>
                       =========================================================================
                 </div>
                 : (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('notfound')) ?
@@ -149,7 +149,7 @@ componentDidMount(){
     this.props.addBook(newBook);
   }
 
-deleteBook(){
+handelDeleteBook(){
 
 }
 
