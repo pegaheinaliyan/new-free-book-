@@ -1,13 +1,15 @@
 module.exports = (knex, Book) => {
   return async (params) => {
-    const deleteId = {id: params.id}
+    const deleteId = params.id
+     console.log("knex deleting",deleteId)
     try {
       await knex('books')
-        .where( deleteId)
+        .where("id",deleteId)
         .del()
-      const result = await knex('books')
-        .where( deleteId)
-        .select();
+        console.log("inside deleting")
+      // const result = await knex('books')
+      //   .where( deleteId)
+      //   .select();
       return deleteId;
     } catch (err) {
       throw err;

@@ -55,6 +55,7 @@ module.exports = (express, services) => {
 /* DELETE book data */
   router.delete('/books', function(req, res) {
     try {
+      console.log("inside router.delete")
       let deletedId = services.db.books.delete(req.body);
 
       deletedId.then(function(result){

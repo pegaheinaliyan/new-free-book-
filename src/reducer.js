@@ -47,7 +47,7 @@ export async function fetchBooks() {
     try {
 				const deleteData = book;
       // APT delete, delete data in DB
-      const deletedId = await ( await fetch('http://localhost:3001', {
+      const deletedId = await ( await fetch('http://localhost:3001/books', {
         method: 'delete',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(deleteData)
@@ -123,8 +123,7 @@ const addNewBook = (state, action) => {
 	return newState;
 }
 
-const pickBook= (state,action) =>{
-
+const pickBook=(state,action) =>{
 	let newState= Object.assign({}, state, { view: "Home" });
 	deleteBook(state.bookInfo);
 	//to be checked *******************
