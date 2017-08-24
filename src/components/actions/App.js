@@ -29,6 +29,12 @@ export const addBook = (newBook) => {
   }
 }
 
+export const deleteBook = () => {
+  return{
+    type : 'DELETE_BOOK',
+  }
+}
+
 export const backHome = () => {
   return{
     type : "BACK_HOME"

@@ -42,7 +42,7 @@ export async function fetchBooks() {
     }
 	}
 	
-	export async function deleteSticker (book) {
+	export async function deleteBook(book) {
 
     try {
 				const deleteData = book;
@@ -78,6 +78,8 @@ const reducer = (state = initialState, action) => {
 			return findByISBN(state, action);
 		case 'ADD_NEW_BOOK':
 			return addNewBook(state, action);
+			case 'DELETE_BOOK':
+			return  pickBook(state, action);
 		case 'ON_ABOUT_US':
 			return Object.assign({}, state, { view: 'aboutUs' })
 		case 'BACK_HOME':
@@ -118,6 +120,19 @@ const addNewBook = (state, action) => {
 	saveBook(action.newBook);
 	newState.records[action.newBook.isbn] = action.newBook;
 
+	return newState;
+}
+
+const pickBook= (state,action) =>{
+
+	let newState= Object.assign({}, state, { view: "Home" });
+	deleteBook(state.bookInfo);
+	//to be checked *******************
+	console.log("newState.records[newState.bookInfo.id]",newState.records[newState.bookInfo.id])
+	delete newState.records[newState.bookInfo.id];
+	console.log("records", newState.records)
+	//newState.bookInfo = null
+	newState.isbn = ""
 	return newState;
 }
 

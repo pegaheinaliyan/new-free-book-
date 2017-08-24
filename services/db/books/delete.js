@@ -3,10 +3,10 @@ module.exports = (knex, Book) => {
     const deleteId = {id: params.id}
     try {
       await knex('books')
-        .where(deleteId)
+        .where( deleteId)
         .del()
       const result = await knex('books')
-        .where(deleteId)
+        .where( deleteId)
         .select();
       return deleteId;
     } catch (err) {

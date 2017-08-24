@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Map from '../containers/Map';
 import './App.css';
-import {fetchBooks} from '../reducer'
+import { fetchBooks } from '../reducer'
 
 let props = { isbn: null };
 
 class App extends Component {
 
-componentDidMount(){
+  componentDidMount() {
     fetchBooks();
   }
 
@@ -37,7 +37,7 @@ componentDidMount(){
             <h1>Find Book!</h1>
             <Map />
             <form onSubmit={this.handleNewISBN.bind(this)}>
-              <input type='text' ref={(input) => this.isbn= input} placeholder="please enter the isbn of the book" />
+              <input type='text' ref={(input) => this.isbn = input} placeholder="please enter the isbn of the book" />
               <input type='submit' />
             </form>
             <div className="search-results">
@@ -51,7 +51,7 @@ componentDidMount(){
                           <div>name:{this.props.records[isbn].name}</div>
                           <div>latitude:{this.props.records[isbn].latitude}</div>
                           <div>longitude:{this.props.records[isbn].longitude}</div>
-                          <div>category:{this.props.records[isbn].category}</div> 
+                          <div>category:{this.props.records[isbn].category}</div>
                           =========================================================================
                         </div>
                       })
@@ -68,9 +68,9 @@ componentDidMount(){
                       <div> <button onClick={this.handelDeleteBook.bind(this)}>TakeBook</button> </div>
                       =========================================================================
                 </div>
-                : (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('notfound')) ?
+                    : (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('notfound')) ?
                       <div>{this.props.bookInfo.notfound} </div>
-                :<div></div>
+                      : <div></div>
               }
               <div className="sub-main">
                 <button className="button" onClick={this.props.backHome}>Back home</button>
@@ -84,20 +84,20 @@ componentDidMount(){
             <h1>Add Book!</h1>
             <Map />
             <form onSubmit={this.handleNewBook.bind(this)}>
-              <input type='text' ref={(name) => this.name = name} placeholder = "name of the book"/>
-              <input type='text' ref={(isbn) => this.isbn = isbn} placeholder = "book isbn" />
-              <input type='text' ref={(category) => this.category = category} placeholder = "category " />
-              <input type='text' ref={(latitude) => this.latitude = latitude} placeholder = "latitude" />
-              <input type='text' ref={(longitude) => this.longitude = longitude} placeholder = "longitude" />
+              <input type='text' ref={(name) => this.name = name} placeholder="name of the book" />
+              <input type='text' ref={(isbn) => this.isbn = isbn} placeholder="book isbn" />
+              <input type='text' ref={(category) => this.category = category} placeholder="category " />
+              <input type='text' ref={(latitude) => this.latitude = latitude} placeholder="latitude" />
+              <input type='text' ref={(longitude) => this.longitude = longitude} placeholder="longitude" />
               <input type='submit' />
             </form>
             <div className="sub-main">
-                <button className="button" onClick={this.props.backHome}>Back home</button>
+              <button className="button" onClick={this.props.backHome}>Back home</button>
             </div>
           </div>
         );
       case ('SuccessfullAdd'):
-        return(
+        return (
           <div className="App">
             <h1>Successfully Added</h1>
             <div className="main">
@@ -108,7 +108,7 @@ componentDidMount(){
           </div>
         )
       case ('aboutUs'):
-        return(
+        return (
           <div className="App">
             <h1>About us</h1>
             <div className="main">
@@ -141,17 +141,18 @@ componentDidMount(){
     const isbn = this.isbn.value;
     const newBook = {
       isbn: this.isbn.value,
-		  name: this.name.value,  
-		  latitude: this.latitude.value,
-		  longitude: this.longitude.value,
-		  category: this.category.value
+      name: this.name.value,
+      latitude: this.latitude.value,
+      longitude: this.longitude.value,
+      category: this.category.value
     }
     this.props.addBook(newBook);
   }
 
-handelDeleteBook(){
-
-}
+  handelDeleteBook(event) {
+    event.preventDefault();
+    this.props.deleteBook()
+  }
 
 }
 
