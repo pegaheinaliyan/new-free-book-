@@ -34,18 +34,8 @@ export async function fetchBooks() {
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(postData)
-      })).json();
-
-      // update state in redux
-      // dispatch({
-      //   type: SAVE_BOOK,
-      //   payload: savedBook
-      // });
-
-      // // reset input form
-      // dispatch({
-      //   type: CLEAR_BOOK,
-			// })
+			})).json();
+			
 			console.log("inside savebook")
     } catch (err) {
       console.log(err.message)
@@ -86,8 +76,6 @@ const reducer = (state = initialState, action) => {
 
 const findByISBN = (state, action) => {
 	let newState = Object.assign({}, state, { ISBN: action.ISBN });
-	console.log("state", state);
-	console.log("newstate", newState);
 	if (state.ISBN !== null) {
 		if (newState.records.hasOwnProperty(newState.ISBN)) {
 			newState.bookInfo = newState.records[newState.ISBN];
@@ -100,9 +88,9 @@ const findByISBN = (state, action) => {
 }
 
 const addNewBook = (state, action) => {
-	console.log("addnewbookstate")
+	console.log(action.newBook,"action.newbook")
 	let newState = Object.assign({}, state, { view: "SuccessfullAdd" });
-	//newState.records[action.newBook.ISBN] = action.newBook;
+	newState.records[action.newBook.ISBN] = action.newBook;
 	saveBook(action.newBook);
 	return newState;
 }
