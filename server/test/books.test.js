@@ -33,4 +33,23 @@ describe("books endpoint", () => {
     console.log('isbn=', book.isbn);
     expect(result.body.hasOwnProperty("isbn")).to.equal(true);
   })
+
+  // it("can delete book", async () => {
+  //   //setup
+
+
+  //   //exercise
+  //   const result = await chai.request(app)
+  //     .delete('/books/')
+  //     .send(book);
+  //   //console.log("result",result)
+  //   //assert
+  //   console.log("result",result)
+
+  //   expect(result.body.//).to.equal(true);
+  // })
+
+
+
+
 })

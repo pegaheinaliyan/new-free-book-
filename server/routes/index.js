@@ -1,11 +1,10 @@
-// var express = require('express');
-// var router = express.Router();
-// const app = express();
 
 
 module.exports = (express, services) => {
   var router = express.Router();
+
   console.log("here")
+
   /* GET book lists */
   // router.get("/",function (req, res) {console.log("get")})
 
@@ -25,7 +24,7 @@ module.exports = (express, services) => {
     }
   })
 
-
+ /* POST book data */
   router.post('/books', function (req, res) {
 
     try {
@@ -49,6 +48,20 @@ module.exports = (express, services) => {
       })
     } catch (err) {
       console.error(err);
+      res.status(400).send(err.message);
+    }
+  });
+
+/* DELETE book data */
+  router.delete('/books', function(req, res) {
+    try {
+      let deletedId = services.db.books.delete(req.body);
+
+      deletedId.then(function(result){
+         res.status(200).send(deletedId);
+      })
+    } catch(err) {
+       console.error(err);
       res.status(400).send(err.message);
     }
   });

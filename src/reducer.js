@@ -40,8 +40,23 @@ export async function fetchBooks() {
     } catch (err) {
       console.log(err.message)
     }
-  }
+	}
+	
+	export async function deleteSticker (book) {
 
+    try {
+				const deleteData = book;
+      // APT delete, delete data in DB
+      const deletedId = await ( await fetch('http://localhost:3001', {
+        method: 'delete',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(deleteData)
+      })).json();
+
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
 
 const initialState = {
@@ -78,12 +93,6 @@ const findByISBN = (state, action) => {
 	let newState = Object.assign({}, state, { isbn: action.isbn });
 	console.log("state.records",state.records)
 	if (state.isbn !== null) {
-		// if (newState.records.hasOwnProperty(newState.isbn)) {
-		// 	newState.bookInfo = newState.records[newState.isbn];
-		// }
-		// else {
-		// 	newState.bookInfo = { notfound: "unfortunately we don't have this book!" };
-		// }
 		for(let id in newState.records ){
 			console.log("newState.records[id].isbn",newState.records[id].isbn)
 			console.log("newState.isbn",newState.isbn);

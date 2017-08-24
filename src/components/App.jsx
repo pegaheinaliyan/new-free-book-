@@ -52,6 +52,7 @@ componentDidMount(){
                           <div>latitude:{this.props.records[isbn].latitude}</div>
                           <div>longitude:{this.props.records[isbn].longitude}</div>
                           <div>category:{this.props.records[isbn].category}</div>
+                           <div> <button onClick={this.deleteBook.bind(this)}>TakeBook</button> </div> 
                           =========================================================================
                         </div>
                       })
@@ -147,6 +148,11 @@ componentDidMount(){
     }
     this.props.addBook(newBook);
   }
+
+deleteBook(){
+
+}
+
 }
 
 
