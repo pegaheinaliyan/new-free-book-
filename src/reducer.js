@@ -46,14 +46,14 @@ export async function fetchBooks() {
 
 const initialState = {
 	view: 'Home',
-	ISBN: "",
+	isbn: "",
 	records: records,
 	bookInfo: null
 };
 
 
 const reducer = (state = initialState, action) => {
-	console.log("state", state);
+
 	switch (action.type) {
 		case 'ON_FIND_BOOK':
 			return Object.assign({}, state, { view: 'findBook' });
@@ -75,13 +75,28 @@ const reducer = (state = initialState, action) => {
 
 
 const findByISBN = (state, action) => {
-	let newState = Object.assign({}, state, { ISBN: action.ISBN });
-	if (state.ISBN !== null) {
-		if (newState.records.hasOwnProperty(newState.ISBN)) {
-			newState.bookInfo = newState.records[newState.ISBN];
-		}
-		else {
-			newState.bookInfo = { notfound: "unfortunately we don't have this book!" };
+	let newState = Object.assign({}, state, { isbn: action.isbn });
+	console.log("state.records",state.records)
+	if (state.isbn !== null) {
+		// if (newState.records.hasOwnProperty(newState.isbn)) {
+		// 	newState.bookInfo = newState.records[newState.isbn];
+		// }
+		// else {
+		// 	newState.bookInfo = { notfound: "unfortunately we don't have this book!" };
+		// }
+		for(let id in newState.records ){
+			console.log("newState.records[id].isbn",newState.records[id].isbn)
+			console.log("newState.isbn",newState.isbn);
+			console.log(typeof newState.isbn)
+			if(newState.records[id].isbn.toString() ===  newState.isbn){
+				
+				console.log('hey')
+				newState.bookInfo = newState.records[id];
+				return newState
+			}
+			else {
+				newState.bookInfo = { notfound: "unfortunately we don't have this book!" };
+			}
 		}
 	}
 	return newState;
@@ -89,10 +104,10 @@ const findByISBN = (state, action) => {
 
 const addNewBook = (state, action) => {
 	console.log(action.newBook,"action.newbook")
-	console.log(action.newBook.ISBN,"ISBN")
+	console.log(action.newBook.isbn,"isbn")
 	let newState = Object.assign({}, state, { view: "SuccessfullAdd" });
 	saveBook(action.newBook);
-	newState.records[action.newBook.ISBN] = action.newBook;
+	newState.records[action.newBook.isbn] = action.newBook;
 
 	return newState;
 }

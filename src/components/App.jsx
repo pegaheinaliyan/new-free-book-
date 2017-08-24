@@ -3,7 +3,7 @@ import Map from '../containers/Map';
 import './App.css';
 import {fetchBooks} from '../reducer'
 
-let props = { ISBN: null };
+let props = { isbn: null };
 
 class App extends Component {
 
@@ -37,30 +37,30 @@ componentDidMount(){
             <h1>Find Book!</h1>
             <Map />
             <form onSubmit={this.handleNewISBN.bind(this)}>
-              <input type='text' ref={(input) => this.ISBN = input} placeholder="please enter the ISBN of the book" />
+              <input type='text' ref={(input) => this.isbn= input} placeholder="please enter the isbn of the book" />
               <input type='submit' />
             </form>
             <div className="search-results">
               {
-                (this.props.ISBN === "") ?
+                (this.props.isbn === "") ?
                   <div>
                     {
-                      Object.keys(this.props.records).map((ISBN, idx) => {
+                      Object.keys(this.props.records).map((isbn, idx) => {
                         return <div key={idx}>
-                          <div>ISBN:{this.props.records[ISBN].ISBN}</div>
-                          <div>name:{this.props.records[ISBN].name}</div>
-                          <div>latitude:{this.props.records[ISBN].latitude}</div>
-                          <div>longitude:{this.props.records[ISBN].longitude}</div>
-                          <div>category:{this.props.records[ISBN].category}</div>
+                          <div>isbn:{this.props.records[isbn].isbn}</div>
+                          <div>name:{this.props.records[isbn].name}</div>
+                          <div>latitude:{this.props.records[isbn].latitude}</div>
+                          <div>longitude:{this.props.records[isbn].longitude}</div>
+                          <div>category:{this.props.records[isbn].category}</div>
                           =========================================================================
                         </div>
                       })
                     }
                   </div>
                   :
-                  (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('ISBN')) ?
+                  (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('isbn')) ?
                     <div>
-                      <div>ISBN:{this.props.bookInfo.ISBN}</div>
+                      <div>isbn:{this.props.bookInfo.isbn}</div>
                       <div>name:{this.props.bookInfo.name}</div>
                       <div>latitude:{this.props.bookInfo.latitude}</div>
                       <div>longitude:{this.props.bookInfo.longitude}</div>
@@ -84,7 +84,7 @@ componentDidMount(){
             <Map />
             <form onSubmit={this.handleNewBook.bind(this)}>
               <input type='text' ref={(name) => this.name = name} placeholder = "name of the book"/>
-              <input type='text' ref={(ISBN) => this.ISBN = ISBN} placeholder = "book ISBN" />
+              <input type='text' ref={(isbn) => this.isbn = isbn} placeholder = "book isbn" />
               <input type='text' ref={(category) => this.category = category} placeholder = "category " />
               <input type='text' ref={(latitude) => this.latitude = latitude} placeholder = "latitude" />
               <input type='text' ref={(longitude) => this.longitude = longitude} placeholder = "longitude" />
@@ -131,15 +131,15 @@ componentDidMount(){
   }
   handleNewISBN(event) {
     event.preventDefault();
-    const bookISBN = this.ISBN.value;
+    const bookISBN = this.isbn.value;
     this.props.findByISBN(bookISBN);
   }
 
   handleNewBook(event) {
     event.preventDefault();
-    const ISBN = this.ISBN.value;
+    const isbn = this.isbn.value;
     const newBook = {
-      isbn: this.ISBN.value,
+      isbn: this.isbn.value,
 		  name: this.name.value,  
 		  latitude: this.latitude.value,
 		  longitude: this.longitude.value,

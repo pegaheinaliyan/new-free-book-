@@ -15,10 +15,10 @@ export const aboutUs = () => {
     type: 'ON_ABOUT_US'
   }
 }
-export const findByISBN = (ISBN) => {
+export const findByISBN = (isbn) => {
   return {
     type: 'FIND_BY_ISBN',
-    ISBN
+    isbn
   }
 }
 
