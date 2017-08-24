@@ -17,9 +17,10 @@ module.exports = (express, services) => {
       books.then(function (result) {
         books = result.map((book) => book.serialize());
         res.status(200).send(books).json();
-     //  console.log("books", books);
+        //  console.log("books", books);
       })
     } catch (err) {
+      console.error(err);
       res.status(400).send(err.message);
     }
   })
@@ -28,24 +29,26 @@ module.exports = (express, services) => {
   router.post('/books', function (req, res) {
 
     try {
-      let book = services.db.stickers.create(req.body);
+      let book = services.db.books.create(req.body);
 
-      book.then(function(result) {
-        res.status(200).send(sticker).json();
+      book.then(function (book) {
+        res.status(200).send(book).json();
       })
     } catch (err) {
+      console.error(err);
       res.status(400).send(err.message);
     }
   });
 
-  router.put('/books', function(req, res) {
+  router.put('/books', function (req, res) {
     try {
-      let book =  services.db.books.update(req.body);
+      let book = services.db.books.update(req.body);
 
-      book.then(function(result){
-          res.status(200).send(book);
+      book.then(function (result) {
+        res.status(200).send(book);
       })
-    } catch(err) {
+    } catch (err) {
+      console.error(err);
       res.status(400).send(err.message);
     }
   });

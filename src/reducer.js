@@ -30,7 +30,7 @@ export async function fetchBooks() {
     try {
       const postData = book;
       // APT post, save data in DB
-      const savedBook= await ( await fetch('http://localhost:3001', {
+      const savedBook= await ( await fetch('http://localhost:3001/books', {
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(postData)
@@ -39,7 +39,7 @@ export async function fetchBooks() {
       // update state in redux
       // dispatch({
       //   type: SAVE_BOOK,
-      //   payload: savedSticker
+      //   payload: savedBook
       // });
 
       // // reset input form
