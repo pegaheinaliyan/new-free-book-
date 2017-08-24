@@ -139,7 +139,7 @@ componentDidMount(){
     event.preventDefault();
     const ISBN = this.ISBN.value;
     const newBook = {
-      ISBN: this.ISBN.value,
+      isbn: this.ISBN.value,
 		  name: this.name.value,  
 		  latitude: this.latitude.value,
 		  longitude: this.longitude.value,
