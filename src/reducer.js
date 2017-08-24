@@ -92,7 +92,7 @@ const addNewBook = (state, action) => {
 	console.log(action.newBook.ISBN,"ISBN")
 	let newState = Object.assign({}, state, { view: "SuccessfullAdd" });
 	saveBook(action.newBook);
-	newState.records[action.newBook.isbn] = action.newBook;
+	newState.records[action.newBook.ISBN] = action.newBook;
 
 	return newState;
 }
