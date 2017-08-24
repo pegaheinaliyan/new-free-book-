@@ -12,18 +12,18 @@ export async function fetchBooks() {
 	for (let record of response) {
 		let book = {};
 		book.id = record.id;
-		book.ISBN = record.isbn;
+		book.isbn = record.isbn;
 		book.name = record.name;
 		book.latitude = record.latitude;
 		book.longitude = record.longitude;
 		book.category = record.category;
 
-		records[book.ISBN] = book;
+		records[book.id] = book;
 
 	}
 
 	console.log(response);
-	return response;
+	return records;
 }
 
   export async function saveBook (book){
@@ -89,9 +89,11 @@ const findByISBN = (state, action) => {
 
 const addNewBook = (state, action) => {
 	console.log(action.newBook,"action.newbook")
+	console.log(action.newBook.ISBN,"ISBN")
 	let newState = Object.assign({}, state, { view: "SuccessfullAdd" });
-	newState.records[action.newBook.ISBN] = action.newBook;
 	saveBook(action.newBook);
+	newState.records[action.newBook.ISBN] = action.newBook;
+
 	return newState;
 }
 

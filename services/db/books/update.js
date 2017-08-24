@@ -4,7 +4,7 @@ module.exports = (knex, Book) => {
       await knex('books')
         .where({id: params.id})
         .update({
-          isbn: params.isbn,
+         isbn: params.isbn,
           name: params.name,
           latitude: params.latitude,
           longitude: params.longitude,
