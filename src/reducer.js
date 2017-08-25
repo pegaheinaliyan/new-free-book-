@@ -112,7 +112,7 @@ const findByISBN = (state, action) => {
 }
 
 const findByCATEGORY = (state, action)=>{
-let newState = Object.assign({}, state, { category: action.category }, {isbn: ""});
+let newState = Object.assign({}, state, { category: action.category }, {isbn: "", bookInfo:[]});
 let found = false;
 console.log("newState.records",newState.records)
 
@@ -142,22 +142,22 @@ const addNewBook = (state, action) => {
 	console.log(action.newBook.isbn,"isbn")
 	let newState = Object.assign({}, state, { view: "SuccessfullAdd" });
 	saveBook(action.newBook);
-	newState.records[action.newBook.isbn] = action.newBook;
+	newState.records[Number(action.newBook.isbn)] = action.newBook;
 
 	return newState;
 }
 
 const pickBook=(state,action) =>{
 	let newState= Object.assign({}, state, { view: "Home" });
-	deleteBook(state.bookInfo);
+	deleteBook(newState.records[action.deleteIsbn]);
+	
 	//to be checked *******************
-	console.log("newState.records[newState.bookInfo.id]",newState.records[newState.bookInfo.id])
-	delete newState.records[newState.bookInfo.id];
+	// console.log("newState.records[newState.bookInfo.id]",newState.records[newState.bookInfo.id])
+	delete newState.records[newState.bookInfo[0].id];
 	console.log("records", newState.records)
 	//newState.bookInfo = null
 	newState.isbn = ""
 	newState.category = ""
-
 	return newState;
 }
 

@@ -47,7 +47,7 @@ export const addBook = (newBook) => {
 
 export const deleteBook = () => {
   return{
-    type : 'DELETE_BOOK',
+    type : 'DELETE_BOOK'
   }
 }
 
