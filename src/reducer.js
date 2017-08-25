@@ -86,7 +86,7 @@ const reducer = (state = initialState, action) => {
 		case 'ON_ABOUT_US':
 			return Object.assign({}, state, { view: 'aboutUs' })
 		case 'BACK_HOME':
-			return Object.assign({}, state, { view: "Home" })
+			return Object.assign({}, state, { view: "Home" },{isbn: "", category: "", bookInfo:[]})
 		default:
 			return state;
 	}
@@ -118,7 +118,6 @@ console.log("newState.records",newState.records)
 
 if (newState.category !== null) {
 	for(let id in newState.records ){
-			console.log("idddddd",id)
 			// console.log("newState.records ",newState.records );
 			console.log("newstate.records[id].category",newState.records[id].category)
 			// console.log("action.category",action.category)
@@ -133,6 +132,7 @@ if (newState.category !== null) {
 	if(!found){
 				newState.bookInfo[0] = { notfound: "unfortunately we don't have this book!" };
 	}
+
 	return newState;
 }
 
