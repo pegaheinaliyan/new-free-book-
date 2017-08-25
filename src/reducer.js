@@ -62,13 +62,14 @@ export async function fetchBooks() {
 const initialState = {
 	view: 'Home',
 	isbn: "",
+	category:"",
 	records: records,
 	bookInfo: null
 };
 
 
 const reducer = (state = initialState, action) => {
-
+	console.log('state= ',state)
 	switch (action.type) {
 		case 'ON_FIND_BOOK':
 			return Object.assign({}, state, { view: 'findBook' });
@@ -120,15 +121,22 @@ console.log("state.records",state.records)
 console.log("newstate.records",newState.records)
 
 if (state.category !== null) {
-	for(let id in state.records){
- if(state.records[id].category === action.category){
-	newState.bookInfo = newState.records[id];
-	return newState;
- }
+		for(let id in newState.records ){
+			// console.log("newState.records[id].isbn",newState.records[id].isbn)
+			// console.log("newState.isbn",newState.isbn);
+			// console.log(typeof newState.isbn)
+			if(newState.records[id].category ===  newState.category){
+				newState.bookInfo = newState.records[id];
+				return newState
+			}
+			else {
+				newState.bookInfo = { notfound: "unfortunately we don't have this book!" };
+			}
+		}
 	}
-}
 	return newState;
 }
+
 
 const addNewBook = (state, action) => {
 	console.log(action.newBook,"action.newbook")

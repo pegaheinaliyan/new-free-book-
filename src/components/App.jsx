@@ -3,7 +3,7 @@ import Map from '../containers/Map';
 import './App.css';
 import { fetchBooks } from '../reducer'
 
-let props = { isbn: null };
+// let props = { isbn: null };
 
 class App extends Component {
 
@@ -12,6 +12,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('my state   ', this.props)
     switch (this.props.view) {
       case ('Home'):
         return (
@@ -28,7 +29,6 @@ class App extends Component {
                 <button className="button" onClick={this.props.aboutUs}>About us</button>
               </div>
             </div>
-            <p>bulit with love by <a href="https://www.linkedin.com/in/saba-ahmadi-4a7557127/"> Saba</a></p>
           </div>
         );
       case ('findBook'):
@@ -51,7 +51,7 @@ class App extends Component {
             =========================================================================
             <div className="search-results">
               {
-                (this.props.isbn === "") ?
+                ((this.props.isbn === "") && (this.props.category==="")) ?
                   <div>
                     {
                       Object.keys(this.props.records).map((isbn, idx) => {
@@ -79,10 +79,26 @@ class App extends Component {
                       <div> <button onClick={this.handelDeleteBook.bind(this)}>TakeBook</button> </div>
                       =========================================================================
                 </div>
+
+                 :
+                  (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('category')) ?
+                    <div>
+                      <div>isbn:{this.props.bookInfo.isbn}</div>
+                      <div>name:{this.props.bookInfo.name}</div>
+                      <div>latitude:{this.props.bookInfo.latitude}</div>
+                      <div>longitude:{this.props.bookInfo.longitude}</div>
+                      <div>category:{this.props.bookInfo.category}</div>
+                      <div> <button onClick={this.handelDeleteBook.bind(this)}>TakeBook</button> </div>
+                      =========================================================================
+                </div>
+
                     : (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('notfound')) ?
                       <div>{this.props.bookInfo.notfound} </div>
                       : <div></div>
+
               }
+
+
               <div className="sub-main">
                 <button className="button" onClick={this.props.backHome}>Back home</button>
               </div>
@@ -147,11 +163,11 @@ class App extends Component {
     this.props.findByISBN(bookISBN);
   }
 
-  handleNewCATEGORY(event){
-  event.preventDefault();
-  const bookCATEGORY = this.category.value;
-  this.props.findByCATEGORY(bookCATEGORY);
-  
+  handleNewCATEGORY(event) {
+    event.preventDefault();
+    const bookCATEGORY = this.category.value;
+    this.props.findByCATEGORY(bookCATEGORY);
+
   }
 
   handleNewBook(event) {
@@ -172,7 +188,7 @@ class App extends Component {
     this.props.deleteBook()
   }
 
-  
+
 
 }
 

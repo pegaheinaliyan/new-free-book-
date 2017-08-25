@@ -6,6 +6,7 @@ import {onFindBook, onAddBook, findByISBN, findByCATEGORY ,addBook, deleteBook,b
 const mapStateToProps = (state) => {
     return {
         view : state.view,
+        category : state.category,
         isbn : state.isbn,
         bookInfo : state.bookInfo,
         records : state.records
