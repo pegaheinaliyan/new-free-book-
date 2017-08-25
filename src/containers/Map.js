@@ -4,11 +4,11 @@ import Map from '../components/Map';
 
 const mapStateToProps = (state) => {
   let markers = [];
-  if(state.isbn !== "" && state.bookInfo.hasOwnProperty('isbn')){
-    markers.push(state.bookInfo);
+  if(state.isbn !== "" && state.bookInfo[0].hasOwnProperty('isbn')){
+    markers.push(state.bookInfo[0]);
     return {markers};
 		}
-		if(state.isbn !== "" && (state.bookInfo.hasOwnProperty('notfound'))){
+		if(state.isbn !== "" && (state.bookInfo[0].hasOwnProperty('notfound'))){
     return {markers};
   }
   for (let prop in state.records) {

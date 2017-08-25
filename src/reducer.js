@@ -64,7 +64,7 @@ const initialState = {
 	isbn: "",
 	category:"",
 	records: records,
-	bookInfo: null
+	bookInfo:[]
 };
 
 
@@ -100,11 +100,11 @@ const findByISBN = (state, action) => {
 	if (state.isbn !== null) {
 		for(let id in newState.records ){
 			if(newState.records[id].isbn.toString() ===  newState.isbn){
-				newState.bookInfo = newState.records[id];
+				newState.bookInfo[0] = newState.records[id];
 				return newState
 			}
 			else {
-				newState.bookInfo = { notfound: "unfortunately we don't have this book!" };
+				newState.bookInfo[0] = { notfound: "unfortunately we don't have this book!" };
 			}
 		}
 	}
@@ -112,21 +112,26 @@ const findByISBN = (state, action) => {
 }
 
 const findByCATEGORY = (state, action)=>{
-let newState = Object.assign({}, state, { category: action.category });
+let newState = Object.assign({}, state, { category: action.category }, {isbn: ""});
+let found = false;
+console.log("newState.records",newState.records)
 
-console.log("state.records",state.records)
-console.log("newstate.records",newState.records)
+if (newState.category !== null) {
+	for(let id in newState.records ){
+			console.log("idddddd",id)
+			// console.log("newState.records ",newState.records );
+			console.log("newstate.records[id].category",newState.records[id].category)
+			// console.log("action.category",action.category)
+			if(newState.records[id].category ===  action.category){
+				found = true;
+				newState.bookInfo.push((newState.records[id]));
+				console.log("bookinfo",newState.bookInfo);
+			}
 
-if (state.category !== null) {
-		for(let id in state.records ){
-			if(state.records[id].category ===  action.category){
-				newState.bookInfo=(newState.records[id]);
-				return newState
-			}
-			else {
-				newState.bookInfo = { notfound: "unfortunately we don't have this book!" };
-			}
 		}
+	}
+	if(!found){
+				newState.bookInfo[0] = { notfound: "unfortunately we don't have this book!" };
 	}
 	return newState;
 }
@@ -152,6 +157,7 @@ const pickBook=(state,action) =>{
 	//newState.bookInfo = null
 	newState.isbn = ""
 	newState.category = ""
+
 	return newState;
 }
 

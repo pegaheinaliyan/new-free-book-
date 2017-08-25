@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('my state   ', this.props)
+    console.log('this.props.isbn  ', this.props.isbn)
     switch (this.props.view) {
       case ('Home'):
         return (
@@ -51,12 +51,11 @@ class App extends Component {
             =========================================================================
             <div className="search-results">
               {
-                ((this.props.isbn === "") && (this.props.category==="")) ?
+                ((this.props.isbn === "") && (this.props.category === "")) ?
                   <div>
                     {
                       Object.keys(this.props.records).map((isbn, idx) => {
                         return <div key={idx}>
-                          <div>                                     </div>
                           <div>isbn:{this.props.records[isbn].isbn}</div>
                           <div>name:{this.props.records[isbn].name}</div>
                           <div>latitude:{this.props.records[isbn].latitude}</div>
@@ -69,32 +68,39 @@ class App extends Component {
                     }
                   </div>
                   :
-                  (this.props.bookInfo!== null && this.props.bookInfo.hasOwnProperty('isbn')) ?
+                  (this.props.bookInfo[0] !== null && this.props.bookInfo[0].hasOwnProperty('isbn') && this.props.isbn !== "" ) ?
                     <div>
-                      <div>isbn:{this.props.bookInfo.isbn}</div>
-                      <div>name:{this.props.bookInfo.name}</div>
-                      <div>latitude:{this.props.bookInfo.latitude}</div>
-                      <div>longitude:{this.props.bookInfo.longitude}</div>
-                      <div>category:{this.props.bookInfo.category}</div>
+                      <div>isbn:{this.props.bookInfo[0].isbn}</div>
+                      <div>name:{this.props.bookInfo[0].name}</div>
+                      <div>latitude:{this.props.bookInfo[0].latitude}</div>
+                      <div>longitude:{this.props.bookInfo[0].longitude}</div>
+                      <div>category:{this.props.bookInfo[0].category}</div>
                       <div> <button onClick={this.handelDeleteBook.bind(this)}>TakeBook</button> </div>
                       =========================================================================
                 </div>
 
-                 :
-                  (this.props.bookInfo!== null && this.props.bookInfo.hasOwnProperty('category')) ?
-                    <div>
-                      <div>isbn:{this.props.bookInfo.isbn}</div>
-                      <div>name:{this.props.bookInfo.name}</div>
-                      <div>latitude:{this.props.bookInfo.latitude}</div>
-                      <div>longitude:{this.props.bookInfo.longitude}</div>
-                      <div>category:{this.props.bookInfo.category}</div>
-                      <div> <button onClick={this.handelDeleteBook.bind(this)}>TakeBook</button> </div>
-                      =========================================================================
-                </div>
+                    :
 
-                    : (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('notfound')) ?
-                      <div>{this.props.bookInfo.notfound} </div>
-                      : <div></div>
+                    (this.props.bookInfo[0] !== null && this.props.bookInfo[0].hasOwnProperty('category')) ?
+                      <div>
+                        {
+                          Object.keys(this.props.bookInfo).map((isbn, idx) => {
+                            return <div key={idx}>
+                              <div>isbn:{this.props.bookInfo[isbn].isbn}</div>
+                              <div>name:{this.props.bookInfo[isbn].name}</div>
+                              <div>latitude:{this.props.bookInfo[isbn].latitude}</div>
+                              <div>longitude:{this.props.bookInfo[isbn].longitude}</div>
+                              <div>category:{this.props.bookInfo[isbn].category}</div>
+                              <div> <button onClick={this.handelDeleteBook.bind(this)}>TakeBook</button> </div>
+                              =========================================================================
+                </div>
+                          })
+
+                        }
+                      </div>
+                      : (this.props.bookInfo[0] !== null && this.props.bookInfo[0].hasOwnProperty('notfound')) ?
+                        <div>{this.props.bookInfo[0].notfound} </div>
+                        : <div></div>
 
               }
 
