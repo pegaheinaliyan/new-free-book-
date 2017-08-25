@@ -40,7 +40,7 @@ describe("books endpoint", () => {
 
   //   //exercise
   //   const result = await chai.request(app)
-  //     .delete('/books/')
+  //     .delete(`/books/{id}`)
   //     .send(book);
   //   //console.log("result",result)
   //   //assert
