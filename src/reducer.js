@@ -77,7 +77,7 @@ const reducer = (state = initialState, action) => {
 		case 'FIND_BY_ISBN':
 			return findByISBN(state, action);
 			case 'FIND_BY_CATEGORY':
-			return findByCategory(state, action);
+			return findByCATEGORY(state, action);
 		case 'ADD_NEW_BOOK':
 			return addNewBook(state, action);
 			case 'DELETE_BOOK':
@@ -98,12 +98,10 @@ const findByISBN = (state, action) => {
 	console.log("state.records",state.records)
 	if (state.isbn !== null) {
 		for(let id in newState.records ){
-			console.log("newState.records[id].isbn",newState.records[id].isbn)
-			console.log("newState.isbn",newState.isbn);
-			console.log(typeof newState.isbn)
+			// console.log("newState.records[id].isbn",newState.records[id].isbn)
+			// console.log("newState.isbn",newState.isbn);
+			// console.log(typeof newState.isbn)
 			if(newState.records[id].isbn.toString() ===  newState.isbn){
-				
-				console.log('hey')
 				newState.bookInfo = newState.records[id];
 				return newState
 			}
@@ -115,10 +113,21 @@ const findByISBN = (state, action) => {
 	return newState;
 }
 
-const findByCategory = (state, action)=>{
+const findByCATEGORY = (state, action)=>{
 let newState = Object.assign({}, state, { category: action.category });
 
+console.log("state.records",state.records)
+console.log("newstate.records",newState.records)
 
+if (state.category !== null) {
+	for(let id in state.records){
+ if(state.records[id].category === action.category){
+	newState.bookInfo = newState.records[id];
+	return newState;
+ }
+	}
+}
+	return newState;
 }
 
 const addNewBook = (state, action) => {

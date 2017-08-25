@@ -3,8 +3,6 @@
 module.exports = (express, services) => {
   var router = express.Router();
 
-  console.log("here")
-
   /* GET book lists */
   // router.get("/",function (req, res) {console.log("get")})
 
@@ -55,7 +53,7 @@ module.exports = (express, services) => {
 /* DELETE book data */
   router.delete('/books', function(req, res) {
     try {
-      console.log("inside router.delete")
+    
       let deletedId = services.db.books.delete(req.body);
 
       deletedId.then(function(result){
