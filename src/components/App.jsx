@@ -37,9 +37,15 @@ class App extends Component {
             <h1>Find Book!</h1>
             <Map />
             <form onSubmit={this.handleNewISBN.bind(this)}>
-              <input type='text' ref={(input) => this.isbn = input} placeholder="please enter the isbn of the book" />
+              <input type='text' ref={(input) => this.isbn = input} placeholder="search by ISBN" />
               <input type='submit' />
             </form>
+            <div>                                     </div>
+            <form onSubmit={this.handleNewISBN.bind(this)}>
+              <input type='text' ref={(input) => this.category = input} placeholder="search by CATEGORY" />
+              <input type='submit' />
+            </form>
+
             <div className="search-results">
               {
                 (this.props.isbn === "") ?
@@ -47,11 +53,13 @@ class App extends Component {
                     {
                       Object.keys(this.props.records).map((isbn, idx) => {
                         return <div key={idx}>
+                          <div>                                     </div>
                           <div>isbn:{this.props.records[isbn].isbn}</div>
                           <div>name:{this.props.records[isbn].name}</div>
                           <div>latitude:{this.props.records[isbn].latitude}</div>
                           <div>longitude:{this.props.records[isbn].longitude}</div>
                           <div>category:{this.props.records[isbn].category}</div>
+
                           =========================================================================
                         </div>
                       })
