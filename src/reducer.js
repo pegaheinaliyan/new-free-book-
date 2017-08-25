@@ -99,9 +99,6 @@ const findByISBN = (state, action) => {
 	console.log("state.records",state.records)
 	if (state.isbn !== null) {
 		for(let id in newState.records ){
-			// console.log("newState.records[id].isbn",newState.records[id].isbn)
-			// console.log("newState.isbn",newState.isbn);
-			// console.log(typeof newState.isbn)
 			if(newState.records[id].isbn.toString() ===  newState.isbn){
 				newState.bookInfo = newState.records[id];
 				return newState
@@ -121,12 +118,9 @@ console.log("state.records",state.records)
 console.log("newstate.records",newState.records)
 
 if (state.category !== null) {
-		for(let id in newState.records ){
-			// console.log("newState.records[id].isbn",newState.records[id].isbn)
-			// console.log("newState.isbn",newState.isbn);
-			// console.log(typeof newState.isbn)
-			if(newState.records[id].category ===  newState.category){
-				newState.bookInfo = newState.records[id];
+		for(let id in state.records ){
+			if(state.records[id].category ===  action.category){
+				newState.bookInfo=(newState.records[id]);
 				return newState
 			}
 			else {
@@ -157,6 +151,7 @@ const pickBook=(state,action) =>{
 	console.log("records", newState.records)
 	//newState.bookInfo = null
 	newState.isbn = ""
+	newState.category = ""
 	return newState;
 }
 

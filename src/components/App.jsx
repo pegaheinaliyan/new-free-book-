@@ -69,7 +69,7 @@ class App extends Component {
                     }
                   </div>
                   :
-                  (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('isbn')) ?
+                  (this.props.bookInfo!== null && this.props.bookInfo.hasOwnProperty('isbn')) ?
                     <div>
                       <div>isbn:{this.props.bookInfo.isbn}</div>
                       <div>name:{this.props.bookInfo.name}</div>
@@ -81,7 +81,7 @@ class App extends Component {
                 </div>
 
                  :
-                  (this.props.bookInfo !== null && this.props.bookInfo.hasOwnProperty('category')) ?
+                  (this.props.bookInfo!== null && this.props.bookInfo.hasOwnProperty('category')) ?
                     <div>
                       <div>isbn:{this.props.bookInfo.isbn}</div>
                       <div>name:{this.props.bookInfo.name}</div>
