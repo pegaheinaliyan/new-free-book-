@@ -37,18 +37,18 @@ class App extends Component {
             <h1>Find Book!</h1>
             <Map />
             <form onSubmit={this.handleNewISBN.bind(this)}>
-               <label>search by isbn :     </label>
-              <input     type='text' ref={(input) => this.isbn = input} placeholder="search by ISBN" />
+              <label>search by isbn :     </label>
+              <input type='text' ref={(input) => this.isbn = input} placeholder="search by ISBN" />
               <input type='submit' />
             </form>
-            <div>     
+            <div>
               =========================================================================                                </div>
-            <form onSubmit={this.handleNewISBN.bind(this)}>
-               <label>search by category  : </label>
+            <form onSubmit={this.handleNewCATEGORY.bind(this)}>
+              <label>search by category  : </label>
               <input type='text' ref={(input) => this.category = input} placeholder="search by CATEGORY" />
               <input type='submit' />
             </form>
- =========================================================================
+            =========================================================================
             <div className="search-results">
               {
                 (this.props.isbn === "") ?
@@ -147,6 +147,13 @@ class App extends Component {
     this.props.findByISBN(bookISBN);
   }
 
+  handleNewCATEGORY(event){
+  event.preventDefault();
+  const bookCATEGORY = this.category.value;
+  this.props.findByCATEGORY(bookCATEGORY);
+  
+  }
+
   handleNewBook(event) {
     event.preventDefault();
     const isbn = this.isbn.value;
@@ -165,7 +172,10 @@ class App extends Component {
     this.props.deleteBook()
   }
 
+  
+
 }
+
 
 
 

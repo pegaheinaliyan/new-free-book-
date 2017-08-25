@@ -22,6 +22,22 @@ export const findByISBN = (isbn) => {
   }
 }
 
+export const findByCATEGORY = (category) => {
+  return {
+    type: 'FIND_BY_CATEGORY',
+    category
+  }
+}
+
+
+export const findBy = (isbn) => {
+  return {
+    type: 'FIND_BY_ISBN',
+    isbn
+  }
+}
+
+
 export const addBook = (newBook) => {
   return{
     type : 'ADD_NEW_BOOK',

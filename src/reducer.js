@@ -76,6 +76,8 @@ const reducer = (state = initialState, action) => {
 			return Object.assign({}, state, { view: 'addBook' });
 		case 'FIND_BY_ISBN':
 			return findByISBN(state, action);
+			case 'FIND_BY_CATEGORY':
+			return findByCategory(state, action);
 		case 'ADD_NEW_BOOK':
 			return addNewBook(state, action);
 			case 'DELETE_BOOK':
@@ -111,6 +113,12 @@ const findByISBN = (state, action) => {
 		}
 	}
 	return newState;
+}
+
+const findByCategory = (state, action)=>{
+let newState = Object.assign({}, state, { category: action.category });
+
+
 }
 
 const addNewBook = (state, action) => {
