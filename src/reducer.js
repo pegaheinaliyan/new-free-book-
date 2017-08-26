@@ -1,6 +1,4 @@
 
-//var apiRounter= require('./routes/index')(express, services);
-//let insertbook = require("../services/db/books/index.js")
 
 let records = {};
 
@@ -22,54 +20,54 @@ export async function fetchBooks() {
 
 	}
 
-	console.log(response);
+
 	return records;
 }
 
-  export async function saveBook (book){
-    try {
-      const postData = book;
-      // APT post, save data in DB
-      const savedBook= await ( await fetch('http://localhost:3001/books', {
-        method: 'post',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(postData)
-			})).json();
-			
-			console.log("inside savebook")
-    } catch (err) {
-      console.log(err.message)
-    }
+export async function saveBook(book) {
+	try {
+		const postData = book;
+		// APT post, save data in DB
+		const savedBook = await (await fetch('http://localhost:3001/books', {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(postData)
+		})).json();
+
+
+	} catch (err) {
+
 	}
-	
-	export async function deleteBook(book) {
+}
 
-    try {
-				const deleteData = book;
-      // APT delete, delete data in DB
-      const deletedId = await ( await fetch('http://localhost:3001/books', {
-        method: 'delete',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(deleteData)
-      })).json();
+export async function deleteBook(book) {
 
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
+	try {
+		const deleteData = book;
+		// APT delete, delete data in DB
+		const deletedId = await (await fetch('http://localhost:3001/books', {
+			method: 'delete',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(deleteData)
+		})).json();
+
+	} catch (err) {
+
+	}
+}
 
 
 const initialState = {
 	view: 'Home',
 	isbn: "",
-	category:"",
+	category: "",
 	records: records,
-	bookInfo:[]
+	bookInfo: []
 };
 
 
 const reducer = (state = initialState, action) => {
-	console.log('state= ',state)
+
 	switch (action.type) {
 		case 'ON_FIND_BOOK':
 			return Object.assign({}, state, { view: 'findBook' });
@@ -77,16 +75,16 @@ const reducer = (state = initialState, action) => {
 			return Object.assign({}, state, { view: 'addBook' });
 		case 'FIND_BY_ISBN':
 			return findByISBN(state, action);
-			case 'FIND_BY_CATEGORY':
+		case 'FIND_BY_CATEGORY':
 			return findByCATEGORY(state, action);
 		case 'ADD_NEW_BOOK':
 			return addNewBook(state, action);
-			case 'DELETE_BOOK':
-			return  pickBook(state, action);
+		case 'DELETE_BOOK':
+			return pickBook(state, action);
 		case 'ON_ABOUT_US':
 			return Object.assign({}, state, { view: 'aboutUs' })
 		case 'BACK_HOME':
-			return Object.assign({}, state, { view: "Home" },{isbn: "", category: "", bookInfo:[]})
+			return Object.assign({}, state, { view: "Home" }, { isbn: "", category: "", bookInfo: [] })
 		default:
 			return state;
 	}
@@ -96,10 +94,10 @@ const reducer = (state = initialState, action) => {
 
 const findByISBN = (state, action) => {
 	let newState = Object.assign({}, state, { isbn: action.isbn });
-	console.log("state.records",state.records)
+
 	if (state.isbn !== null) {
-		for(let id in newState.records ){
-			if(newState.records[id].isbn.toString() ===  newState.isbn){
+		for (let id in newState.records) {
+			if (newState.records[id].isbn.toString() === newState.isbn) {
 				newState.bookInfo[0] = newState.records[id];
 				return newState
 			}
@@ -111,26 +109,25 @@ const findByISBN = (state, action) => {
 	return newState;
 }
 
-const findByCATEGORY = (state, action)=>{
-let newState = Object.assign({}, state, { category: action.category }, {isbn: "", bookInfo:[]});
-let found = false;
-console.log("newState.records",newState.records)
+const findByCATEGORY = (state, action) => {
+	let newState = Object.assign({}, state, { category: action.category }, { isbn: "", bookInfo: [] });
+	let found = false;
 
-if (newState.category !== null) {
-	for(let id in newState.records ){
-			// console.log("newState.records ",newState.records );
-			console.log("newstate.records[id].category",newState.records[id].category)
-			// console.log("action.category",action.category)
-			if(newState.records[id].category ===  action.category){
+
+	if (newState.category !== null) {
+		for (let id in newState.records) {
+
+
+			if (newState.records[id].category === action.category) {
 				found = true;
 				newState.bookInfo.push((newState.records[id]));
-				console.log("bookinfo",newState.bookInfo);
+
 			}
 
 		}
 	}
-	if(!found){
-				newState.bookInfo[0] = { notfound: "unfortunately we don't have this book!" };
+	if (!found) {
+		newState.bookInfo[0] = { notfound: "unfortunately we don't have this book!" };
 	}
 
 	return newState;
@@ -138,8 +135,7 @@ if (newState.category !== null) {
 
 
 const addNewBook = (state, action) => {
-	console.log(action.newBook,"action.newbook")
-	console.log(action.newBook.isbn,"isbn")
+
 	let newState = Object.assign({}, state, { view: "SuccessfullAdd" });
 	saveBook(action.newBook);
 	newState.records[Number(action.newBook.isbn)] = action.newBook;
@@ -147,16 +143,16 @@ const addNewBook = (state, action) => {
 	return newState;
 }
 
-const pickBook=(state,action) =>{
-	let newState= Object.assign({}, state, { view: "Home" });
-	console.log("newState.records[action.deleteIsbn]",newState.records[action.deleteIsbn]);
+const pickBook = (state, action) => {
+	let newState = Object.assign({}, state, { view: "Home" });
+
 	deleteBook(state.bookInfo[0]);
-	
+
 	//to be checked *******************
-	// console.log("newState.records[newState.bookInfo.id]",newState.records[newState.bookInfo.id])
+
 	delete newState.records[newState.bookInfo[0].id];
 	console.log("records", newState.records)
-	//newState.bookInfo = null
+
 	newState.isbn = ""
 	newState.category = ""
 	return newState;

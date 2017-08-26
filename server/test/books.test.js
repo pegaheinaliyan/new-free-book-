@@ -44,7 +44,7 @@ describe("books endpoint", () => {
         .send(book);
 
 
-      
+
 
       let resultdelete = await chai.request(app)
         .delete(`/books`)
@@ -54,21 +54,21 @@ describe("books endpoint", () => {
     }
 
     let resultget = await chai.request(app)
-        .get('/books/')
-        .send();
+      .get('/books/')
+      .send();
 
-        console.log(resultget.body,"result.body");
-        let flag=false;
 
-        for(let i of resultget.body){
-          console.log("iiiiiiiiiiiiiiiiiii", i)
-          if(i.isbn.hasOwnProperty(6)){
-            flag=true;
-          }
+    let flag = false;
 
-        }
+    for (let i of resultget.body) {
 
-      expect(flag).to.equal(false);
+      if (i.isbn.hasOwnProperty(6)) {
+        flag = true;
+      }
+
+    }
+
+    expect(flag).to.equal(false);
 
   })
 

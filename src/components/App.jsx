@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('this.props.isbn  ', this.props.isbn)
+
     switch (this.props.view) {
       case ('Home'):
         return (
@@ -68,7 +68,7 @@ class App extends Component {
                     }
                   </div>
                   :
-                  (this.props.bookInfo[0] !== null && this.props.bookInfo[0].hasOwnProperty('isbn') && this.props.isbn !== "" ) ?
+                  (this.props.bookInfo[0] !== null && this.props.bookInfo[0].hasOwnProperty('isbn') && this.props.isbn !== "") ?
                     <div>
                       <div>isbn:{this.props.bookInfo[0].isbn}</div>
                       <div>name:{this.props.bookInfo[0].name}</div>

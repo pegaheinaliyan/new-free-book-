@@ -12,7 +12,7 @@ module.exports = (knex, Book) => {
         })
 
       const book = await knex('books')
-        .where({'id': id[0]})
+        .where({ 'id': id[0] })
         .select();
       return new Book(book[0]);
     } catch (err) {
