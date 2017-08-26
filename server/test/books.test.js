@@ -14,7 +14,7 @@ describe("books endpoint", () => {
     const result = await chai.request(app)
       .get('/books/')
       .send();
-    //console.log("result",result)
+
     //assert
     expect(result.body.length > 0).to.equal(true);
   })
@@ -27,27 +27,34 @@ describe("books endpoint", () => {
     const result = await chai.request(app)
       .post('/books/')
       .send(book);
-    //console.log("result",result)
+
     //assert
-    console.log("result",result)
-    console.log('isbn=', book.isbn);
     expect(result.body.hasOwnProperty("isbn")).to.equal(true);
   })
 
-  // it("can delete book", async () => {
-  //   //setup
+  it("can delete book", async () => {
+    try {
+      //setup
+      let book = { "isbn": 4, "name": "The Goldfinch", "latitude": 35.6916, "longitude": 139.688, "category": "Novel" }
+
+      //exercise
+
+      let resultpost = await chai.request(app)
+        .post('/books/')
+        .send(book);
 
 
-  //   //exercise
-  //   const result = await chai.request(app)
-  //     .delete(`/books/{id}`)
-  //     .send(book);
-  //   //console.log("result",result)
-  //   //assert
-  //   console.log("result",result)
+      let resultget = await chai.request(app)
+        .get('/books/')
+        .send();
 
-  //   expect(result.body.//).to.equal(true);
-  // })
+      let resultdelete = await chai.request(app)
+        .delete(`/books`)
+        .send(resultpost.body);
+    } catch (err) {
+      console.error('err=', err);
+    }
+  })
 
 
 

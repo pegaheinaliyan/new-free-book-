@@ -53,14 +53,17 @@ module.exports = (express, services) => {
 /* DELETE book data */
   router.delete('/books', function(req, res) {
     try {
-    
+      const isbn = req.query.isbn;
+      console.log("req.body",req.body)
       let deletedId = services.db.books.delete(req.body);
 
       deletedId.then(function(result){
          res.status(200).send(deletedId);
-      })
+      }).catch(function(err) {
+        console.error('error', err);
+      });
     } catch(err) {
-       console.error(err);
+       console.error('---------error', err);
       res.status(400).send(err.message);
     }
   });

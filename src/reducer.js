@@ -149,7 +149,8 @@ const addNewBook = (state, action) => {
 
 const pickBook=(state,action) =>{
 	let newState= Object.assign({}, state, { view: "Home" });
-	deleteBook(newState.records[action.deleteIsbn]);
+	console.log("newState.records[action.deleteIsbn]",newState.records[action.deleteIsbn]);
+	deleteBook(state.bookInfo[0]);
 	
 	//to be checked *******************
 	// console.log("newState.records[newState.bookInfo.id]",newState.records[newState.bookInfo.id])
