@@ -54,7 +54,7 @@ module.exports = (express, services) => {
   router.delete('/books', function(req, res) {
     try {
       const isbn = req.query.isbn;
-      console.log("req.body",req.body)
+  
       let deletedId = services.db.books.delete(req.body);
 
       deletedId.then(function(result){

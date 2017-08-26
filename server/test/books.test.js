@@ -35,7 +35,7 @@ describe("books endpoint", () => {
   it("can delete book", async () => {
     try {
       //setup
-      let book = { "isbn": 4, "name": "The Goldfinch", "latitude": 35.6916, "longitude": 139.688, "category": "Novel" }
+      let book = { "isbn": 6, "name": "The Goldfinch", "latitude": 35.6916, "longitude": 139.688, "category": "Novel" }
 
       //exercise
 
@@ -44,9 +44,7 @@ describe("books endpoint", () => {
         .send(book);
 
 
-      let resultget = await chai.request(app)
-        .get('/books/')
-        .send();
+      
 
       let resultdelete = await chai.request(app)
         .delete(`/books`)
@@ -54,6 +52,24 @@ describe("books endpoint", () => {
     } catch (err) {
       console.error('err=', err);
     }
+
+    let resultget = await chai.request(app)
+        .get('/books/')
+        .send();
+
+        console.log(resultget.body,"result.body");
+        let flag=false;
+
+        for(let i of resultget.body){
+          console.log("iiiiiiiiiiiiiiiiiii", i)
+          if(i.isbn.hasOwnProperty(6)){
+            flag=true;
+          }
+
+        }
+
+      expect(flag).to.equal(false);
+
   })
 
 
